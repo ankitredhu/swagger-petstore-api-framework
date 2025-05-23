@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Petstore API Test Suite">
+  <test name="Get Pet API Test">
+    <classes>
+      <class name="tests.petstore.GetPetByIdTest"/>
+    </classes>
+  </test>
+</suite>
