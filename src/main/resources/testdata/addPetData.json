@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1001,
+    "name": "Tiger",
+    "status": "available"
+  },
+  {
+    "id": 1002,
+    "name": "Simba",
+    "status": "pending"
+  }
+]

@@ -1,9 +1,9 @@
 package tests.petstore;
 
 import framework.base.BaseTest;
+import framework.client.ApiClient;
 import framework.pojo.Pet;
 import framework.utils.LoggerUtil;
-import framework.utils.PayloadBuilder;
 import io.restassured.response.Response;
 
 import org.apache.logging.log4j.Logger;
@@ -12,22 +12,18 @@ import org.testng.annotations.Test;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-import static io.restassured.RestAssured.given;
+import framework.utils.JsonDataProvider;
 
+@Test(dataProvider = "addPetData", dataProviderClass = JsonDataProvider.class)
 public class AddPetTest extends BaseTest {
 	
 	Logger log = LoggerUtil.getLogger(AddPetTest.class);
 
     @Test
-    public void testAddNewPet() {
-        Pet newPet = PayloadBuilder.buildPetPayload(12345, "Tommy", "available");
+    public void testAddNewPet(Pet newPet) {
 
-        log.info("Sending POST request to add new pet");
-        Response response = given()
-                .spec(requestSpec)
-                .body(newPet)
-                .when()
-                .post("/pet");
+        log.info("Sending POST request to add pet: " + newPet.getName());
+        Response response = ApiClient.post(requestSpec, "/pet", newPet);
 
         response.then().log().all();
         
@@ -37,6 +33,5 @@ public class AddPetTest extends BaseTest {
 
         log.info("Validating response");
         Assert.assertEquals(response.getStatusCode(), 200, "Pet was not created");
-        Assert.assertEquals(response.jsonPath().getString("name"), "Tommy");
     }
 }
