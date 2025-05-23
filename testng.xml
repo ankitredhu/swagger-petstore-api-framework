@@ -4,6 +4,7 @@
     <classes>
       <class name="tests.petstore.GetPetByIdTest"/>
       <class name="tests.petstore.AddPetTest"/>
+      <class name="tests.petstore.AddPetNegativeTest"/>
     </classes>
   </test>
 </suite>
